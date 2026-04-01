@@ -120,11 +120,14 @@ button.secondary {
 .footerRow {
   display: flex;
   justify-content: center;
+  gap: 12px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .footerRow button {
-  width: 100%;
+  flex: 1;
+  min-width: 200px;
   max-width: 320px; /* nice iPhone-friendly width */
 }
 

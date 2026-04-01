@@ -441,7 +441,11 @@ document.addEventListener("DOMContentLoaded", () => {
   monthsEl.addEventListener("change", buildCalendar);
 
   icsBtn.addEventListener("click", downloadICS);
-  daysOffBtn.addEventListener("click", downloadDaysOffICS);
+  if (daysOffBtn) {
+    daysOffBtn.addEventListener("click", downloadDaysOffICS);
+  } else {
+    console.error("daysOffBtn element not found");
+  }
 
   // Default: today
   startDateEl.value = fmtDate(new Date());
