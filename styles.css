@@ -1,7 +1,7 @@
 :root {
   --border: #e1e5e9;
   --muted: #64748b;
-  --bg: #ffffff;
+  --bg: #f8fafc;
   --primary: #475569;
   --secondary: #f1f5f9;
   --accent: #0f172a;
@@ -26,6 +26,7 @@ h1 {
   padding: 12px;
   margin-bottom: 12px;
   box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+  background: #ffffff;
 }
 
 .row {
