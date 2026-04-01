@@ -19,7 +19,6 @@ h1 {
 }
 
 .card {
-  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 12px;
   margin-bottom: 12px;
@@ -55,12 +54,18 @@ input, select, button {
   max-width: 100%;
   min-width: 0;
   font-size: 16px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid #cfcfcf;
   background: #fff;
   min-height: 44px; /* iOS tap target */
   box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  input, select, button {
+    padding: 10px 12px;
+  }
 }
 
 /* iOS date input sizing fix */
@@ -230,7 +235,7 @@ table.cal td {
 .note {
   font-size: 13px;
   color: var(--muted);
-  margin: 0;
+  margin: 12px 0;
   line-height: 1.4;
 }
 
