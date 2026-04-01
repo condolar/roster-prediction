@@ -34,7 +34,10 @@ h1 {
 }
 
 /* Prevent grid children from forcing overflow (important on iOS) */
-.row > div { min-width: 0; }
+.row > div { 
+  min-width: 0;
+  overflow: hidden;
+}
 
 @media (min-width: 640px) {
   .row { grid-template-columns: repeat(3, 1fr); }
@@ -122,16 +125,27 @@ button.secondary {
 /* Center single action button */
 .footerRow {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 12px;
   margin-top: 10px;
-  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .footerRow button {
-  flex: 1;
-  min-width: 200px;
-  max-width: 320px; /* nice iPhone-friendly width */
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .footerRow {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .footerRow button {
+    flex: 1;
+    min-width: 200px;
+    max-width: 320px;
+  }
 }
 
 .months {
@@ -216,7 +230,8 @@ table.cal td {
 .note {
   font-size: 13px;
   color: var(--muted);
-  margin: 6px 0 12px; /* even spacing above/below */
+  margin: 0;
+  line-height: 1.4;
 }
 
 .error {
