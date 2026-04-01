@@ -1,10 +1,10 @@
 :root {
-  --border: #334155;
-  --muted: #94a3b8;
-  --bg: #0f172a;
-  --primary: #f1f5f9;
-  --secondary: #334155;
-  --accent: #f1f5f9;
+  --border: #374151;
+  --muted: #9ca3af;
+  --bg: #111827;
+  --primary: #f9fafb;
+  --secondary: #374151;
+  --accent: #f9fafb;
 }
 
 * { box-sizing: border-box; }
@@ -208,6 +208,7 @@ table.cal td {
   height: 74px;
   padding: 6px;
   overflow: hidden; /* safety to prevent any spillover */
+  background: rgba(255, 255, 255, 0.02);
 }
 
 /* Stack badge UNDER date number (prevents overlap on mobile) */
