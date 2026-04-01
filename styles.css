@@ -23,7 +23,6 @@ h1 {
   padding: 12px;
   margin-bottom: 12px;
   box-shadow: 0 1px 0 rgba(0,0,0,0.03);
-  overflow: hidden;
 }
 
 .row {
@@ -35,7 +34,6 @@ h1 {
 /* Prevent grid children from forcing overflow (important on iOS) */
 .row > div { 
   min-width: 0;
-  overflow: hidden;
 }
 
 @media (min-width: 640px) {
