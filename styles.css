@@ -1,0 +1,220 @@
+:root {
+  --border: #e6e6e6;
+  --muted: #666;
+  --bg: #fff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 16px;
+  background: var(--bg);
+  color: #111;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile-first */
+  gap: 12px;
+}
+
+/* Prevent grid children from forcing overflow (important on iOS) */
+.row > div { min-width: 0; }
+
+@media (min-width: 640px) {
+  .row { grid-template-columns: repeat(3, 1fr); }
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+input, select, button {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #cfcfcf;
+  background: #fff;
+  min-height: 44px; /* iOS tap target */
+  box-sizing: border-box;
+}
+
+/* iOS date input sizing fix */
+input[type="date"] {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Make selects look consistent when closed (iOS will still use native picker when opened) */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+
+  border: 1px solid #cfcfcf;
+  border-radius: 12px;
+
+  box-shadow: none;
+  outline: none;
+
+  /* custom arrow */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #666 50%),
+    linear-gradient(135deg, #666 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 12px) 50%;
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+
+  padding-right: 36px; /* room for arrow */
+}
+
+/* Helps iOS visually match text sizing */
+input, select {
+  -webkit-text-size-adjust: 100%;
+}
+
+button {
+  border: 0;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #f2f2f2;
+  color: #111;
+  border: 1px solid var(--border);
+}
+
+.help {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+/* Center single action button */
+.footerRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footerRow button {
+  width: 100%;
+  max-width: 320px; /* nice iPhone-friendly width */
+}
+
+.months {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .months { grid-template-columns: 1fr 1fr; }
+}
+
+.monthTitle {
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+table.cal {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+table.cal th {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+table.cal td {
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  height: 74px;
+  padding: 6px;
+  overflow: hidden; /* safety to prevent any spillover */
+}
+
+/* Stack badge UNDER date number (prevents overlap on mobile) */
+.cellTop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.dayNum {
+  font-size: 12px;
+  color: #111;
+  font-weight: 600;
+}
+
+.outside .dayNum {
+  color: #aaa;
+  font-weight: 500;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.work { background: #e8f1ff; }
+.fdo  { background: #f4f9ec; }
+.frd  { background: #e9f9ef; }
+
+.todayRing {
+  outline: 2px solid #111;
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+
+/* Summary spacing above calendar */
+.note {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 6px 0 12px; /* even spacing above/below */
+}
+
+.error {
+  color: #b00020;
+  font-size: 13px;
+  margin-top: 8px;
+}

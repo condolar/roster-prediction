@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>20-Week Roster Projection</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>20-Week Roster Projection</h1>
+
+  <div class="card">
+    <div class="row">
+      <div>
+        <label for="startDate">Start week date</label>
+        <input id="startDate" type="date" />
+      </div>
+
+      <div>
+        <label for="startWeek">Roster week number (1–20)</label>
+        <select id="startWeek"></select>
+      </div>
+
+      <div>
+        <label for="months">Projection length</label>
+        <select id="months">
+          <option value="3">3 months</option>
+          <option value="6">6 months</option>
+          <option value="12" selected>12 months</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="footerRow">
+  <button id="icsBtn" class="secondary" type="button">
+    Download Calendar (.ics)
+  </button>
+</div>
+
+
+
+    <div id="err" class="error" style="display:none;"></div>
+  </div>
+
+  <div class="card">
+    <div id="summary" class="note"></div>
+    <div id="calendar" class="months"></div>
+
+    <div class="note">
+      iPhone tip: after importing, you can hide/show this roster in Calendar (Calendars button) or delete it later.
+      If iOS asks where to import, you can create a calendar named “Roster” first and import into that.
+    </div>
+  </div>
+
+  <script src="app.js?v=2"></script>
+
+</body>
+</html>
