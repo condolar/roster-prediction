@@ -60,17 +60,23 @@ input, select, button {
   box-sizing: border-box;
 }
 
-@media (min-width: 640px) {
-  input, select, button {
-    padding: 10px 12px;
-  }
-}
-
 /* iOS date input sizing fix */
 input[type="date"] {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  box-sizing: border-box;
+  padding: 6px 8px;
+}
+
+@media (min-width: 640px) {
+  input, select, button {
+    padding: 10px 12px;
+  }
+  
+  input[type="date"] {
+    padding: 8px 10px;
+  }
 }
 
 /* Make selects look consistent when closed (iOS will still use native picker when opened) */
