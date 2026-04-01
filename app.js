@@ -180,7 +180,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const displayEndExclusive = addMonths(displayStart, months);
       const displayEnd = addDays(displayEndExclusive, -1);
 
-      summaryEl.textContent = `Displaying ${months} month${months === 1 ? "" : "s"}: ${monthLabel(displayStart)} – ${monthLabel(displayEnd)}`;
+      // hide month summary line; user asked not to display this
+      summaryEl.textContent = "";
+      summaryEl.style.display = "none";
 
       calendarEl.innerHTML = "";
 
