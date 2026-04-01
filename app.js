@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const startWeekEl = document.getElementById("startWeek");
   const monthsEl = document.getElementById("months");
   const icsBtn = document.getElementById("icsBtn");
+  const daysOffBtn = document.getElementById("daysOffBtn");
   const errEl = document.getElementById("err");
   const summaryEl = document.getElementById("summary");
   const calendarEl = document.getElementById("calendar");
@@ -353,6 +354,86 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ==========================
+  // Days off ICS download
+  // ==========================
+  function downloadDaysOffICS() {
+    try {
+      showError("");
+
+      if (!startDateEl.value) {
+        showError("Please pick a start week date first.");
+        return;
+      }
+
+      const selectedDate = parseDateLocal(startDateEl.value);
+      const startWeek = Number(startWeekEl.value);
+      const months = Number(monthsEl.value);
+
+      const anchorMonday = startOfWeekMonday(selectedDate);
+      const exportStart = startOfMonth(anchorMonday);
+      const exportEndExclusive = addMonths(exportStart, months);
+
+      const now = new Date();
+      const dtstamp =
+        `${now.getUTCFullYear()}${String(now.getUTCMonth() + 1).padStart(2, "0")}${String(now.getUTCDate()).padStart(2, "0")}` +
+        `T${String(now.getUTCHours()).padStart(2, "0")}${String(now.getUTCMinutes()).padStart(2, "0")}${String(now.getUTCSeconds()).padStart(2, "0")}Z`;
+
+      const calName = `Days Off (${months}m ${monthLabel(exportStart)}–${monthLabel(addDays(exportEndExclusive, -1))})`;
+
+      const lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//RosterProjection//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "X-WR-CALNAME:" + escapeICS(calName),
+        "X-WR-TIMEZONE:Europe/London",
+      ];
+
+      let cursor = new Date(exportStart);
+      while (cursor < exportEndExclusive) {
+        const s = getStatus(anchorMonday, startWeek, cursor);
+
+        // Only include days off (FDO and FRD, exclude Work days)
+        if (s.status !== "Work") {
+          const dtStart = icsDate(cursor);
+          const dtEnd = icsDate(addDays(cursor, 1)); // all-day end is exclusive
+          const uid = `roster-${dtStart}-w${s.weekNumber}@rosterprojection`;
+
+          lines.push(
+            "BEGIN:VEVENT",
+            `UID:${uid}`,
+            `DTSTAMP:${dtstamp}`,
+            `DTSTART;VALUE=DATE:${dtStart}`,
+            `DTEND;VALUE=DATE:${dtEnd}`,
+            `SUMMARY:${escapeICS(s.status)}`,
+            `DESCRIPTION:${escapeICS(`Roster Week ${s.weekNumber} • ${dayNames[s.dayIndex]} • ${fmtDate(cursor)}`)}`,
+            "END:VEVENT"
+          );
+        }
+
+        cursor = addDays(cursor, 1);
+      }
+
+      lines.push("END:VCALENDAR");
+
+      const blob = new Blob([lines.join("\r\n")], { type: "text/calendar;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "roster-days-off.ics";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      showError(`Error: ${e.message}`);
+    }
+  }
+
+  // ==========================
   // Auto-update wiring
   // ==========================
   startDateEl.addEventListener("change", buildCalendar);
@@ -360,6 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
   monthsEl.addEventListener("change", buildCalendar);
 
   icsBtn.addEventListener("click", downloadICS);
+  daysOffBtn.addEventListener("click", downloadDaysOffICS);
 
   // Default: today
   startDateEl.value = fmtDate(new Date());
