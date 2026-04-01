@@ -28,10 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const dayNames = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-
-  // ==========================
-  // DOM elements
-  // ==========================
+  const MS_PER_DAY = 24 * 60 * 60 * 1000;
   const startDateEl = document.getElementById("startDate");
   const startWeekEl = document.getElementById("startWeek");
   const monthsEl = document.getElementById("months");
@@ -136,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Roster lookup (works backwards too)
   // ==========================
   function getStatus(anchorMonday, startWeek1to20, date) {
-    const diffDays = Math.floor((date - anchorMonday) / (24 * 60 * 60 * 1000));
+    const diffDays = Math.floor((date - anchorMonday) / MS_PER_DAY);
 
     const weekOffset = Math.floor(diffDays / 7);
     const weekIndex = mod((startWeek1to20 - 1) + weekOffset, 20); // 0..19
@@ -170,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const selectedDate = parseDateLocal(startDateEl.value);
-      const startWeek = Number(startWeekEl.value);
-      const months = Number(monthsEl.value);
+      const startWeek = parseInt(startWeekEl.value, 10);
+      const months = parseInt(monthsEl.value, 10);
 
       const anchorMonday = startOfWeekMonday(selectedDate);
 
@@ -291,8 +288,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const selectedDate = parseDateLocal(startDateEl.value);
-      const startWeek = Number(startWeekEl.value);
-      const months = Number(monthsEl.value);
+      const startWeek = parseInt(startWeekEl.value, 10);
+      const months = parseInt(monthsEl.value, 10);
 
       const anchorMonday = startOfWeekMonday(selectedDate);
       const exportStart = startOfMonth(anchorMonday);
@@ -368,8 +365,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const selectedDate = parseDateLocal(startDateEl.value);
-      const startWeek = Number(startWeekEl.value);
-      const months = Number(monthsEl.value);
+      const startWeek = parseInt(startWeekEl.value, 10);
+      const months = parseInt(monthsEl.value, 10);
 
       const anchorMonday = startOfWeekMonday(selectedDate);
       const exportStart = startOfMonth(anchorMonday);
