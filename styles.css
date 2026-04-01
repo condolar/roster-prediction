@@ -1,19 +1,19 @@
 :root {
-  --bg: #0f172a;
-  --surface: #111827;
-  --surface-2: #1f2933;
-
-  --text: #e5e7eb;
-  --text-muted: #9ca3af;
-
-  --border: rgba(255,255,255,0.06);
-
-  --accent: #3b82f6;
-  --accent-soft: rgba(59,130,246,0.15);
-
-  --work: #93c5fd;
-  --fdo: #86efac;
-  --frd: #fcd34d;
+  --bg: #121212;           /* app background */
+  --surface: #1e1e1e;      /* card backgrounds, table cells */
+  --surface-2: #2a2a2a;    /* inputs, select, button backgrounds */
+  
+  --text: #e0e0e0;         /* primary text */
+  --text-muted: #a0a0a0;   /* secondary text / labels */
+  
+  --border: rgba(255,255,255,0.08);
+  
+  --accent: #4f91ff;       /* interactive items / today ring */
+  --accent-soft: rgba(79,145,255,0.15);
+  
+  --work: #64b5f6;         /* work day badge */
+  --fdo: #81c784;          /* free day badge */
+  --frd: #ffd54f;          /* rest day badge */
 }
 
 * { box-sizing: border-box; }
